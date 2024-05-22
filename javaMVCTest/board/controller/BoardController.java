@@ -53,6 +53,7 @@ public class BoardController {
 		System.out.println("검색 작업");
 		System.out.println("-------------------");
 		System.out.print("- 검색할 제목 입력>> ");
+		scan.nextLine();
 		String searchWord = scan.nextLine();
 		
 		return searchWord;
@@ -124,7 +125,7 @@ public class BoardController {
 	
 	private void deleteBoard(int boardNo) {
 		System.out.println();
-		System.out.print("보기를 원하는 게시물 번호 입력 >>");
+		System.out.print("삭제를 원하는 게시물 번호 입력 >>");
 		int b_no = scan.nextInt();
 		
 		int cnt = service.deleteBoard(boardNo);
