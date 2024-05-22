@@ -9,10 +9,15 @@ import kr.or.ddit.board.vo.BoardVo;
 
 public class BoardServiceImpl implements IBoardService {
 	
-	private IBoardDao dao;	//DAO객체가 저장될 변수 선언
+		private IBoardDao dao;	//DAO객체가 저장될 변수 선언
 	
 		// 1번
 		private static BoardServiceImpl service;
+		
+		// 2번 (생성자)
+		private BoardServiceImpl() {
+			dao = BoardDaoImpl.getInstance();
+		}
 		
 		// 3번
 		public static BoardServiceImpl getInstance() {
@@ -20,12 +25,6 @@ public class BoardServiceImpl implements IBoardService {
 			
 			return service;
 		}
-	
-	//생성자
-	private BoardServiceImpl() {
-		//dao = new MemberDaoImpl();	//DAO객체 생성
-		dao = BoardDaoImpl.getInstance();
-	}
 
 	@Override
 	public int insertBoard(BoardVo boardVo) {
@@ -34,9 +33,9 @@ public class BoardServiceImpl implements IBoardService {
 	}
 
 	@Override
-	public int deleteBoard(BoardVo boardVo) {
+	public int deleteBoard(int boardNo) {
 		// TODO Auto-generated method stub
-		return dao.deleteBoard(boardVo);
+		return dao.deleteBoard(boardNo);
 	}
 
 	@Override
@@ -49,6 +48,30 @@ public class BoardServiceImpl implements IBoardService {
 	public List<BoardVo> getAllBoard() {
 		// TODO Auto-generated method stub
 		return dao.getAllBoard();
+	}
+
+	@Override
+	public BoardVo getBoard(int boardNo) {
+		// 조회수 증가
+		int cnt = dao.boardCountIncrement(boardNo);
+		
+		// 조회수 증가 실패일 때
+		if(cnt==0) {
+			return null;
+		}
+		return dao.getBoard(boardNo);
+	}
+
+	@Override
+	public List<BoardVo> getSearchBoard(String title) {
+		// TODO Auto-generated method stub
+		return dao.getSearchBoard(title);
+	}
+
+	@Override
+	public int boardCountIncrement(int boardNo) {
+		// TODO Auto-generated method stub
+		return dao.boardCountIncrement(boardNo);
 	}
 
 }
