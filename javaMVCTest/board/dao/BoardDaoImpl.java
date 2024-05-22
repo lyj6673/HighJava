@@ -200,9 +200,9 @@ public class BoardDaoImpl implements IBoardDao{
 		try {
 			conn = DBUtil3.getConnection();
 			
-			String sql = "select * from jdbc_board"
-					+ "where board_title like '%' || ? || '%' "
-					+ "order by board_no desc ";
+			String sql = " select * from jdbc_board "
+					+ " where board_title like '%' || ? || '%' "
+					+ " order by board_no desc ";
 			
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, title);
