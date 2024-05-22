@@ -182,7 +182,8 @@ public class BoardController {
 				int no = boardVo.getB_no();
 				String title2 = boardVo.getB_title();
 				String writer = boardVo.getB_writer();
-				System.out.println(no + "\t" + title2 + "\t" + writer);
+				int count = boardVo.getB_cnt();
+				System.out.println(no + "\t" + title2 + "\t" + writer + "\t" + count);
 			}
 		}
 		System.out.println("----------------------------------------------");
